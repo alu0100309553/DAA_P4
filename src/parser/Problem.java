@@ -7,9 +7,17 @@ import java.io.IOException;
 public class Problem {
   private BufferedReader reader;
   private int nodos;
-  private double [][] distancias;
+  public double [][] distancias;
   
-  Problem(String filename){
+  public int getNodos(){
+    return nodos;
+  }
+  
+  public double getDist(int a, int b){
+    return distancias[a][b];
+  }
+  
+  public Problem(String filename){
     try{
       reader = new BufferedReader( new FileReader(filename));
     }

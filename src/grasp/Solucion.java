@@ -1,4 +1,4 @@
-package constructivo;
+package grasp;
 
 public class Solucion {
   private boolean[] sol;

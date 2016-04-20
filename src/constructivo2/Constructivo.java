@@ -1,4 +1,4 @@
-package constructivo;
+package constructivo2;
 
 import parser.Problem;
 
@@ -16,38 +16,28 @@ public class Constructivo {
     init();
     do {
       solP = new Solucion(sol);
-      int n = mejornodo();
-      if (eval.md(sol, n)> eval.md(sol)){
-        sol.addnodo(n);
+      int n = peornodo();
+      if (eval.md(n, sol)> eval.md(sol)){
+        sol.quitarnodo(n);
       }
     }while (!sol.iguales(solP));
   }
 
   private void init(){
-    double maxDist = 0;
-    int tempA = 0; 
-    int tempB = 0; 
     for (int i = 0; i < problema.getNodos(); i++) {
-      for (int j = i + 1 ; j < sol.getSol().length; j++){
-        if (problema.getDist(i, j) >= maxDist){
-          maxDist = problema.getDist(i, j);
-          tempA = i; 
-          tempB = j;
-        }
-      }
+      sol.addnodo(i);
     }
-    sol.addnodo(tempA);
-    sol.addnodo(tempB);
+
   }
   
-  private int mejornodo(){
-    double maxDist = -100000;
+  private int peornodo(){
+    double maxDist = -100000000;
     int tempN = 0; 
     for (int i = 0; i < problema.getNodos(); i ++){
-      if (!sol.getSol()[i]){
-        if (eval.md(sol, i) > maxDist){
-          maxDist = eval.md(sol, i);
-          tempN = i;
+      if (sol.getSol()[i]){
+          if (eval.md(i, sol) > maxDist){
+            maxDist = eval.md(i, sol);
+            tempN = i;
         }
         
       }

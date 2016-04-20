@@ -1,4 +1,4 @@
-package constructivo;
+package constructivo2;
 
 public class Solucion {
   private boolean[] sol;
