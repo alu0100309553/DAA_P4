@@ -13,7 +13,13 @@ public class Distancia implements Comparable<Distancia> {
 
   @Override
   public int compareTo(Distancia o) {
-    return ((int)(distancia*100))-((int)(o.distancia*100));
+    if (distancia > o.distancia){
+      return 1;
+    }else if (distancia < o.distancia){
+      return -1;
+    }else {
+      return 0;
+    }
   }
 
 }

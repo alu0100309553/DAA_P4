@@ -19,29 +19,47 @@ public class Grasp {
     eval = new Eval(problema);
     sol = new Solucion(problema.getNodos());
     int contador = 0;
-    while (contador < 10){
-      
+    // while (contador < 10){
+    sol = randomGreedy();
+
     //fase constructiva
-      
-      
-      
+
+
+
     //busqueda local
-    
-    }
+
+    //}
   }
   
+  private ArrayList <Solucion> generarVecinos() {
+    return null;
+  }
   
+  private Solucion busquedaLocal(Solucion sol_){
+    ArrayList <Solucion> listadevecinos = new ArrayList <Solucion>();
+    listadevecinos = generarVecinos();
+    for (Solucion vecino : listadevecinos){
+      
+    }
+    //lista de vecinos
+    //Comprobar si hay mejor
+    //if existe mejor busquedalocal de mejor
+    //return mejor
+    return sol_;
+  }
+
+
   private Solucion randomGreedy(){
     Solucion aux = new Solucion(problema.getNodos());
     randominit(aux);
     Solucion auxP;
     do {
       auxP = new Solucion(aux);
-      int n = mejornodo();
-      if (eval.md(sol, n)> eval.md(sol)){
-        sol.addnodo(n);
+      int n = randommejornodo();
+      if (eval.md(aux, n)> eval.md(aux)){
+        aux.addnodo(n);
       }
-    }while (!sol.iguales(solP));
+    }while (!aux.iguales(auxP));
     return auxP;
     
     
@@ -70,23 +88,17 @@ public class Grasp {
 
   }
   
-  private int mejornodo(){
+  private int randommejornodo(){
     
-    //estoy por aqui
-    
-    double maxDist = -100000000;
-    int tempN = 0; 
+    Random rm = new Random();
+    ArrayList <Nodo> nodos = new ArrayList <Nodo>();
     for (int i = 0; i < problema.getNodos(); i ++){
-      if (sol.getSol()[i]){
-          if (eval.md(i, sol) > maxDist){
-            maxDist = eval.md(i, sol);
-            tempN = i;
-        }
-        
+      if (!sol.getSol()[i]){
+        nodos.add(new Nodo (i, eval.md(sol, i)));
       }
     }
-
-    return tempN;
-    
+    Collections.sort(nodos);
+    int aux = rm.nextInt(3);
+    return nodos.get(aux).nodo;
   }
 }
