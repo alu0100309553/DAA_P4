@@ -1,35 +1,70 @@
-package grasp;
+package nvs;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import grasp.Solucion;
+import nvs.Solucion;
 import parser.Problem;
 
-public class Grasp {
+public class Nvs {
   private Problem problema;
   public Solucion sol;
   public Solucion solP;
   private Eval eval;
 
-  public Grasp (String filename){
+  public Nvs (String filename){
     problema = new Problem (filename);
     problema.read();
     eval = new Eval(problema);
     sol = new Solucion(problema.getNodos());
-    int contador = 0;
-    // while (contador < 10){
     sol = randomGreedy();
-    sol = busquedaLocal(sol);
-
-    //fase constructiva
-
-
-
-    //busqueda local
-
-    //}
+    //init();
+    solP = new Solucion(sol);
+    int k = 0;
+    
+    do {
+      sol = new Solucion(solP);
+      k = 1;
+      Solucion aux;
+      do {
+        aux = agitacion(k, solP);
+        aux = busquedaLocal(aux);
+        if (eval.md(aux)> eval.md(solP)){
+          solP = new Solucion(aux);
+          k = 1;
+        }else{
+          k +=1;
+        }
+      } while (k<3);
+    }while (!sol.iguales(solP));
+   sol = solP;
+  }
+  
+  
+  private Solucion agitacion(int k, Solucion sol_){
+    Random rm = new Random();
+    ArrayList <Solucion> aux = new ArrayList <Solucion>();
+    Solucion fin = new Solucion(problema.getNodos());
+    Solucion auxSol = new Solucion (sol_);
+    for (int j = 0; j<k; j++){
+      
+      for (int i = 0; i < problema.getNodos(); i++){
+        if (auxSol.getSol()[i]){
+          auxSol.quitarnodo(i);
+          aux.add(auxSol);
+        }
+        else {
+          auxSol.addnodo(i);
+          aux.add(auxSol);
+        }
+      }
+      auxSol = aux.get(rm.nextInt(aux.size()));
+      if (j==k-1){
+        fin = auxSol;
+      }
+    }
+    return fin;
   }
   
   private ArrayList <Solucion> generarVecinos(Solucion sol_) {

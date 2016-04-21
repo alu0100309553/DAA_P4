@@ -1,35 +1,35 @@
-package grasp;
+package multi;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import grasp.Solucion;
+import multi.Solucion;
 import parser.Problem;
 
-public class Grasp {
+public class Multi {
   private Problem problema;
   public Solucion sol;
   public Solucion solP;
   private Eval eval;
 
-  public Grasp (String filename){
+  public Multi (String filename){
+    ArrayList <Solucion> randomSols = new ArrayList <Solucion>();
     problema = new Problem (filename);
     problema.read();
     eval = new Eval(problema);
     sol = new Solucion(problema.getNodos());
     int contador = 0;
-    // while (contador < 10){
-    sol = randomGreedy();
-    sol = busquedaLocal(sol);
-
-    //fase constructiva
-
-
-
-    //busqueda local
-
-    //}
+    for (int i = 0; i < problema.getNodos(); i ++){
+      randomSols.add(randomGreedy());
+    }
+    sol = randomSols.get(0);
+    for (Solucion esta : randomSols){
+      solP = busquedaLocal(esta);
+      if (eval.md(solP)> eval.md(sol)){
+        sol = solP;
+      }
+    }
   }
   
   private ArrayList <Solucion> generarVecinos(Solucion sol_) {
