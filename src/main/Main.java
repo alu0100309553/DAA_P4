@@ -2,7 +2,6 @@ package main;
 
 import java.util.Locale;
 import java.util.Scanner;
-
 import constructivo.Constructivo;
 import constructivo2.Constructivo2;
 import grasp.Grasp;
