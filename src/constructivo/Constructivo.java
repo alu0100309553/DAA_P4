@@ -1,5 +1,7 @@
 package constructivo;
 
+import aux.Eval;
+import aux.Solucion;
 import parser.Problem;
 
 public class Constructivo {
@@ -17,7 +19,7 @@ public class Constructivo {
     do {
       solP = new Solucion(sol);
       int n = mejornodo();
-      if (eval.md(sol, n)> eval.md(sol)){
+      if (eval.md(sol, n)>= eval.md(sol)){
         sol.addnodo(n);
       }
     }while (!sol.iguales(solP));
@@ -55,5 +57,29 @@ public class Constructivo {
 
     return tempN;
     
+  }
+  
+  public String toString(){
+    String aux = "";
+    if (sol.getSol()[0]){
+      aux += "{" + 1;
+    }
+    else {
+      aux += "{" + 0;
+    }
+    for (int i = 1; i< problema.getNodos(); i++){
+      if (sol.getSol()[i]){
+        aux += ", " + 1;
+      }else{
+        aux += ", " + 0;
+      }
+    }
+
+    aux += "}";
+    return aux;  
+  }
+  
+  public double fObj(){
+    return eval.md(sol);
   }
 }

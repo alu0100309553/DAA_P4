@@ -1,19 +1,10 @@
-package constructivo2;
+package aux;
 
 public class Solucion {
   private boolean[] sol;
 
-  Solucion(int N) {
+  public Solucion(int N) {
     sol = new boolean[N];
-    /**
-    for (int i = 0; i < sol.length; i++) {
-      if ((i == nodoA) | (i == nodoB)) {
-        sol[i] = true;
-      } else {
-        sol[i] = false;
-      }
-    }
-    **/
   }
 
   Solucion(Solucion sol_, int nodo) {
@@ -24,7 +15,7 @@ public class Solucion {
     sol[nodo] = true;
   }
   
-  Solucion(Solucion sol_) {
+  public Solucion(Solucion sol_) {
     sol = new boolean[sol_.sol.length];
     for (int i = 0; i < sol.length; i++){
       sol[i] = sol_.sol[i];

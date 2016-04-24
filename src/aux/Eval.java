@@ -1,4 +1,4 @@
-package constructivo2;
+package aux;
 
 import parser.Problem;
 
@@ -6,7 +6,7 @@ public class Eval {
   private Solucion sol;
   private Problem distancias; 
   
-  Eval (Problem distancias_){
+  public Eval (Problem distancias_){
     distancias = distancias_;
   }
   public Double md (Solucion sol_){

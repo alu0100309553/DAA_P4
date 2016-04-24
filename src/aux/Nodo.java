@@ -1,4 +1,4 @@
-package multi;
+package aux;
 
 public class Nodo implements Comparable<Nodo> {
   public int nodo;
@@ -12,9 +12,9 @@ public class Nodo implements Comparable<Nodo> {
 
   @Override
   public int compareTo(Nodo o) {
-    if (md > o.md){
+    if (md < o.md){
       return 1;
-    }else if (md < o.md){
+    }else if (md > o.md){
       return -1;
     }else {
       return 0;

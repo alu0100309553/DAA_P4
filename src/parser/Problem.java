@@ -49,7 +49,6 @@ public class Problem {
     for (int i = 0; i < nodos; i++){
       distancias[i][i] = 0;
     }
-    System.out.println(distancias + "" + nodos);
   }
   
 

@@ -1,17 +1,25 @@
 package grasp;
 
+import java.util.Locale;
+
+import constructivo.Constructivo;
 import parser.Problem;
 
 public class Test {
 
   public static void main(String[] args) {
-    Grasp problem = new Grasp("datos3.txt");
-    for (int i = 0; i<problem.sol.getSol().length; i++){
-      System.out.println(problem.sol.getSol()[i]);
-    }
-
-    System.out.println("hola");
+    long inicio = System.currentTimeMillis();
+    Grasp problem = new Grasp("100nodos.txt", 2);
+    long fin = System.currentTimeMillis();
+    long tiempo = fin - inicio;
     
+      System.out.println(problem.toString());
+      System.out.format(Locale.ENGLISH,"%.2f%n", problem.fObj());
+      System.out.println(tiempo);
+
+    System.out.println("Grasp");
+    
+  
 
   }
 

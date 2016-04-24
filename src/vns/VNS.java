@@ -1,25 +1,30 @@
-package nvs;
+package vns;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-import nvs.Solucion;
+import aux.Nodo;
+import aux.Solucion;
+import aux.Distancia;
+import aux.Eval;
 import parser.Problem;
 
-public class Nvs {
+public class VNS {
   private Problem problema;
   public Solucion sol;
   public Solucion solP;
   private Eval eval;
+  private int kmax;
 
-  public Nvs (String filename){
+  public VNS (String filename, int kmax_){
+    kmax = kmax_;
     problema = new Problem (filename);
     problema.read();
     eval = new Eval(problema);
     sol = new Solucion(problema.getNodos());
-    sol = randomGreedy();
-    //init();
+    //sol = randomGreedy();
+    sol = randomSolucion();
     solP = new Solucion(sol);
     int k = 0;
     
@@ -34,18 +39,16 @@ public class Nvs {
           solP = new Solucion(aux);
           k = 1;
         }else{
-          k +=1;
+          k ++;
         }
-      } while (k<3);
+      } while (k<=kmax);
     }while (!sol.iguales(solP));
    sol = solP;
   }
   
-  
   private Solucion agitacion(int k, Solucion sol_){
     Random rm = new Random();
     ArrayList <Solucion> aux = new ArrayList <Solucion>();
-    Solucion fin = new Solucion(problema.getNodos());
     Solucion auxSol = new Solucion (sol_);
     for (int j = 0; j<k; j++){
       
@@ -60,11 +63,8 @@ public class Nvs {
         }
       }
       auxSol = aux.get(rm.nextInt(aux.size()));
-      if (j==k-1){
-        fin = auxSol;
-      }
     }
-    return fin;
+    return auxSol;
   }
   
   private ArrayList <Solucion> generarVecinos(Solucion sol_) {
@@ -87,14 +87,18 @@ public class Nvs {
     ArrayList <Solucion> listadevecinos = new ArrayList <Solucion>();
     listadevecinos = generarVecinos(sol_);
     Solucion mejor = new Solucion (sol_);
-    for (Solucion vecino : listadevecinos){
-      if (eval.md(vecino)> eval.md(mejor)){
-        mejor = vecino;
+    Solucion inicial = new Solucion (sol_);
+
+    do{
+      inicial = mejor;
+      listadevecinos = generarVecinos(inicial);
+      for (Solucion vecino : listadevecinos){
+        if (eval.md(vecino)> eval.md(mejor)){
+          mejor = vecino;
+        }
       }
-    }
-    if (!mejor.iguales(sol_)){
-      mejor = busquedaLocal(mejor);
-    }
+    } while (!mejor.iguales(inicial));
+
     return mejor;
   }
 
@@ -111,9 +115,6 @@ public class Nvs {
       }
     }while (!aux.iguales(auxP));
     return auxP;
-    
-    
-    
   }
   
   private void randominit(Solucion auxSol){
@@ -130,16 +131,8 @@ public class Nvs {
     auxSol.addnodo(dist.get(aux).nodoB);
     
   }
-
-  private void init(){
-    for (int i = 0; i < problema.getNodos(); i++) {
-      sol.addnodo(i);
-    }
-
-  }
   
   private int randommejornodo(){
-    
     Random rm = new Random();
     ArrayList <Nodo> nodos = new ArrayList <Nodo>();
     for (int i = 0; i < problema.getNodos(); i ++){
@@ -148,7 +141,45 @@ public class Nvs {
       }
     }
     Collections.sort(nodos);
-    int aux = rm.nextInt(3);
-    return nodos.get(aux).nodo;
+    if (nodos.size()==0){
+      return 0;
+    }else{
+      int rLimit = Math.min(3, nodos.size());
+      int aux = rm.nextInt(rLimit);
+      return nodos.get(aux).nodo;
+    }
   }
+  public String toString(){
+    String aux = "";
+    if (sol.getSol()[0]){
+      aux += "{" + 1;
+    }
+    else {
+      aux += "{" + 0;
+    }
+    for (int i = 1; i< problema.getNodos(); i++){
+      if (sol.getSol()[i]){
+        aux += ", " + 1;
+      }else{
+        aux += ", " + 0;
+      }
+    }
+
+    aux += "}";
+    return aux;  
+  }
+  
+  public double fObj(){
+    return eval.md(sol);
+  }
+  
+  private Solucion randomSolucion(){
+    Random rm = new Random();
+    Solucion aux = new Solucion(problema.getNodos());
+    for (int i = 0; i < problema.getNodos(); i ++){
+      aux.getSol()[i]= rm.nextBoolean();
+    }
+    return aux;
+  }
+  
 }

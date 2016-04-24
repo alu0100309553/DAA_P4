@@ -1,4 +1,4 @@
-package multi;
+package aux;
 
 public class Distancia implements Comparable<Distancia> {
   public int nodoA;
@@ -13,9 +13,9 @@ public class Distancia implements Comparable<Distancia> {
 
   @Override
   public int compareTo(Distancia o) {
-    if (distancia > o.distancia){
+    if (distancia < o.distancia){
       return 1;
-    }else if (distancia < o.distancia){
+    }else if (distancia > o.distancia){
       return -1;
     }else {
       return 0;
