@@ -8,7 +8,7 @@ public class Test {
 
   public static void main(String[] args) {
     long inicio = System.currentTimeMillis();
-    Constructivo problem = new Constructivo("100nodos.txt");
+    Constructivo problem = new Constructivo("10nodos.txt");
     long fin = System.currentTimeMillis();
     long tiempo = fin - inicio;
     System.out.println(problem.toString());

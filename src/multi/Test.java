@@ -9,7 +9,7 @@ public class Test {
 
   public static void main(String[] args) {
     long inicio = System.currentTimeMillis();
-    Multi problem = new Multi("100nodos.txt");
+    Multi problem = new Multi("20nodos.txt");
     long fin = System.currentTimeMillis();
     long tiempo = fin - inicio;
     System.out.println(problem.toString());
@@ -17,5 +17,4 @@ public class Test {
     System.out.println(tiempo);
     System.out.println("MultiArranque");
   }
-
 }

@@ -9,7 +9,7 @@ public class Test {
 
   public static void main(String[] args) {
     long inicio = System.currentTimeMillis();
-    Grasp problem = new Grasp("100nodos.txt", 2);
+    Grasp problem = new Grasp("10nodos.txt", 2);
     long fin = System.currentTimeMillis();
     long tiempo = fin - inicio;
     
