@@ -1,5 +1,14 @@
+/**
+ * Diseño y Análisis de Algoritmos - Práctica 4
+ * Algoritmos constructivos y búsquedas por entornos.
+ * 3º Grado en Ingeniería Informática - Computación.
+ * Rubén Labrador Páez
+ * alu0100309553@ull.edu.es
+ */
+
 package aux;
 
+//Clase que almacena soluciones en forma de vector booleano, dispone de métodos para añadir o quitar nodos así como para comparar soluciones
 public class Solucion {
   private boolean[] sol;
 
@@ -41,6 +50,5 @@ public class Solucion {
         iguales = false;
       }
     return iguales;
-    
   }
 }

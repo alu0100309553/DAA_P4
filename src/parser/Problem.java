@@ -1,22 +1,31 @@
+/**
+ * Diseño y Análisis de Algoritmos - Práctica 4
+ * Algoritmos constructivos y búsquedas por entornos.
+ * 3º Grado en Ingeniería Informática - Computación.
+ * Rubén Labrador Páez
+ * alu0100309553@ull.edu.es
+ */
+
 package parser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+//Clase que lee el problema en un fichero y almacena en número de nodos y la matriz de distancias
 public class Problem {
   private BufferedReader reader;
   private int nodos;
   public double [][] distancias;
-  
+
   public int getNodos(){
     return nodos;
   }
-  
+
   public double getDist(int a, int b){
     return distancias[a][b];
   }
-  
+
   public Problem(String filename){
     try{
       reader = new BufferedReader( new FileReader(filename));
@@ -26,7 +35,7 @@ public class Problem {
       System.err.println("try java ArrayRank inputtextfile");
     }
   }
-  
+
   public void read(){
     try {
       while (reader.ready()) {
@@ -50,6 +59,5 @@ public class Problem {
       distancias[i][i] = 0;
     }
   }
-  
 
 }

@@ -1,3 +1,11 @@
+/**
+ * Diseño y Análisis de Algoritmos - Práctica 4
+ * Algoritmos constructivos y búsquedas por entornos.
+ * 3º Grado en Ingeniería Informática - Computación.
+ * Rubén Labrador Páez
+ * alu0100309553@ull.edu.es
+ */
+
 package constructivo2;
 
 import aux.Eval;

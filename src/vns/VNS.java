@@ -1,3 +1,11 @@
+/**
+ * Diseño y Análisis de Algoritmos - Práctica 4
+ * Algoritmos constructivos y búsquedas por entornos.
+ * 3º Grado en Ingeniería Informática - Computación.
+ * Rubén Labrador Páez
+ * alu0100309553@ull.edu.es
+ */
+
 package vns;
 
 import java.util.ArrayList;
@@ -28,21 +36,20 @@ public class VNS {
 		solP = new Solucion(sol);
 		int k = 0;
 		do {
-			sol = new Solucion(solP);							//Actualizar sol con solP
-			k = 1;
+			sol = new Solucion(solP);							//Actualizar sol con solP para comparar al fina del bucle
+			k = 1;                                //Inicializar k con 1
 			Solucion aux;
 			do {
-				aux = agitacion(k, solP);
-				aux = busquedaLocal(aux);
-				if (eval.md(aux)> eval.md(solP)){
-					solP = new Solucion(aux);
+				aux = agitacion(k, solP);           //Seleccionar un candidatos al azar de entre los vecinos según k
+				aux = busquedaLocal(aux);           //Búsqueda Lical sobre el candidato
+				if (eval.md(aux)> eval.md(solP)){   //Si la solución es mejor actualizar solP
+					solP = new Solucion(aux);          
 					k = 1;
-				}else{
+				}else{                              //Si no aumentar k 
 					k ++;
 				}
-			} while (k<=kmax);
-		}while (!sol.iguales(solP));
-		sol = solP;
+			} while (k<=kmax);                     //Repetir el bucle mientras no se haya superado k max
+		}while (!sol.iguales(solP));             //Repetir el bucle mientras las solución mejores
 	}
 
 	//Método que devuelve uno de los vecinos de manera aleatoria, el vecino se genera en función de k

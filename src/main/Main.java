@@ -1,3 +1,11 @@
+/**
+ * Diseño y Análisis de Algoritmos - Práctica 4
+ * Algoritmos constructivos y búsquedas por entornos.
+ * 3º Grado en Ingeniería Informática - Computación.
+ * Rubén Labrador Páez
+ * alu0100309553@ull.edu.es
+ */
+
 package main;
 
 import java.util.Locale;
@@ -7,6 +15,7 @@ import constructivo2.Constructivo2;
 import grasp.Grasp;
 import multi.Multi;
 
+//Clase main desde la que se pueden ejecutar todos los algoritmos
 public class Main {
 
   public static void main(String[] args) {
